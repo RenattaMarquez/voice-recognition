@@ -20,7 +20,7 @@ n_iter = 500
 covariance_type = 'diag'
 
 # Función para grabar con barra espaciadora
-def record_audio_on_space(output_filename='grabacion.wav', duration=1.5):
+def record_audio_on_space(output_filename='grabacion.wav', duration=2):
     print("Presiona la BARRA ESPACIADORA para grabar...")   
     while True:
         if keyboard.is_pressed('space'):
@@ -119,17 +119,17 @@ def recognize_from_file(filepath, models, scalers):
         print(f"  {w}: {s:.2f}")
     print(f"\n🔊 Palabra reconocida: **{best_word.upper()}**")
 
-# Programa principal
+# Programa principal      
 def main():
     print("Entrenando modelos...")
     models, scalers = train_models()
     print("\nListo para grabar y reconocer.")
     
     while True:
-        record_audio_on_space("grabacion.wav", duration=1.5)
+        record_audio_on_space("grabacion.wav", duration=2)
         recognize_from_file("grabacion.wav", models, scalers)
-        print("\nPresiona ESC para salir o cualquier tecla para otra grabación.")
-        if keyboard.read_key() == 'esc':
+        print("\nPresiona Q para salir o cualquier tecla para otra grabación.")
+        if keyboard.read_key() == 'q':
             print("Saliendo...")
             break
 

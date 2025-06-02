@@ -12,13 +12,13 @@ warnings.filterwarnings("ignore")
 
 # Configuración
 words = ['abajo', 'empieza', 'levanta', 'detente', 'izquierda', 'derecha', 'pausa', 'continua']
-base_folder = 'assets'
+base_folder = 'assets_multi'
 sample_rate = 16000
 n_mfcc = 13
 n_components = 8
 n_iter = 500
 covariance_type = 'diag'
-threshold_silence = 0.02  # Umbral para detectar silencios (ajustable)
+threshold_silence = 0.02  # Umbral para detectar silencios
 
 # Función para recortar silencios al inicio y final
 def trim_silence(signal, threshold=threshold_silence):
@@ -40,14 +40,14 @@ def trim_silence(signal, threshold=threshold_silence):
     start = 0
     for i in range(len(abs_signal)):
         if abs_signal[i] > threshold:
-            start = max(0, i - 100)  # Dejar un pequeño margen
+            start = max(0, i - 100)  
             break
     
     # Encontrar el último punto donde la amplitud supera el umbral
     end = len(abs_signal)
     for i in range(len(abs_signal)-1, 0, -1):
         if abs_signal[i] > threshold:
-            end = min(len(abs_signal), i + 100)  # Dejar un pequeño margen
+            end = min(len(abs_signal), i + 100) 
             break
     
     return signal[start:end]
@@ -136,7 +136,7 @@ def train_models():
             print(f"Error entrenando {word}: {e}")
             models[word] = None
             scalers[word] = None
-
+   
     return models, scalers
 
 # Reconocimiento de palabra desde archivo
@@ -159,7 +159,7 @@ def recognize_from_file(filepath, models, scalers):
     print("\nResultados de reconocimiento:")
     for w, s in sorted(scores.items(), key=lambda x: -x[1]):
         print(f"  {w}: {s:.2f}")
-    print(f"\n🔊 Palabra reconocida: **{best_word.upper()}**")
+    print(f"\n Palabra reconocida: **{best_word.upper()}**")
 
 # Programa principal      
 def main():
